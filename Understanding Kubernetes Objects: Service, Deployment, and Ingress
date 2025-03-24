@@ -1,0 +1,110 @@
+### **Understanding Kubernetes Objects: Service, Deployment, and Ingress**  
+
+Kubernetes uses different objects to manage application workloads and networking. The three commonly used ones are:  
+
+1. **Deployment** → Manages and scales pods.  
+2. **Service** → Exposes and load balances traffic to pods.  
+3. **Ingress** → Routes external traffic to services using domain names.
+
+---
+
+## **1️⃣ Deployment (Manages and Scales Pods)**  
+A **Deployment** is responsible for:  
+✔ Defining the application’s container, replicas, and environment.  
+✔ Managing pod creation, updates, and rollbacks.  
+✔ Ensuring high availability and scalability.  
+
+### **📌 Example: Nginx Deployment YAML**
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+        - name: nginx
+          image: nginx:latest
+          ports:
+            - containerPort: 80
+```
+✅ **Creates 3 Nginx pods.**  
+✅ **Ensures they restart if they fail.**  
+✅ **Supports rolling updates and rollbacks.**  
+
+---
+
+## **2️⃣ Service (Exposes Pods Internally & Externally)**  
+A **Service** provides a stable way to access pods. Since pod IPs change, a service ensures **consistent access**.
+
+### **📌 Example: ClusterIP Service (Internal Access)**
+```yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-service
+spec:
+  selector:
+    app: nginx
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+  type: ClusterIP  # Exposes the service inside the cluster
+```
+✅ **Allows other pods to access Nginx using:**  
+```sh
+curl http://nginx-service
+```
+
+### **🔹 Other Service Types**
+| Type | Use Case |
+|------|---------|
+| **ClusterIP** (Default) | Internal access within the cluster |
+| **NodePort** | Exposes the service on a node’s IP & port |
+| **LoadBalancer** | Uses a cloud provider’s external load balancer |
+| **Headless** | Directly returns pod IPs for stateful apps |
+
+---
+
+## **3️⃣ Ingress (Routes External Traffic via Domain Names)**
+A **Kubernetes Ingress** is used to route external HTTP/S traffic to services based on domain names.
+
+### **📌 Example: Ingress for Nginx**
+```yaml
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: nginx-ingress
+spec:
+  rules:
+    - host: myapp.example.com  # External domain
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: nginx-service
+                port:
+                  number: 80
+```
+✅ **Users can access the app via:** `http://myapp.example.com`  
+✅ **Requires an Ingress Controller (e.g., Nginx Ingress Controller)**  
+
+---
+
+## **🔹 Summary: When to Use Each?**
+| Object | Purpose |
+|--------|---------|
+| **Deployment** | Manages and scales pods |
+| **Service** | Exposes and load balances traffic to pods |
+| **Ingress** | Routes external traffic using domain names |
