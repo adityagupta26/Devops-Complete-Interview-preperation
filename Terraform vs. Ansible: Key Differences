@@ -1,0 +1,67 @@
+### **Terraform vs. Ansible: Key Differences**  
+
+Terraform and Ansible are both **Infrastructure as Code (IaC) tools**, but they serve different purposes.  
+
+| Feature | **Terraform** | **Ansible** |
+|---------|-------------|-------------|
+| **Purpose** | Infrastructure provisioning | Configuration management & automation |
+| **Execution Model** | Declarative (Defines desired state) | Procedural (Executes tasks step-by-step) |
+| **State Management** | Uses a **state file** to track resources | Stateless (No state file) |
+| **Idempotency** | Ensures desired state using state tracking | Ensures idempotency by re-running tasks |
+| **Cloud Support** | Multi-cloud (AWS, Azure, GCP, etc.) | Works with cloud & on-prem servers |
+| **Provisioning** | Creates/destroys infrastructure | Modifies existing infrastructure |
+| **Agent Required?** | No agent required | No agent required (SSH-based) |
+| **Language** | HCL (HashiCorp Configuration Language) | YAML (Ansible Playbooks) |
+
+---
+
+## **1️⃣ What is Terraform?**  
+Terraform is used to **provision and manage cloud infrastructure**. It uses **HCL (HashiCorp Configuration Language)** to define infrastructure in a **declarative** way.  
+
+### **Example: Creating an AWS EC2 Instance with Terraform**  
+```hcl
+provider "aws" {
+  region = "us-east-1"
+}
+
+resource "aws_instance" "web" {
+  ami           = "ami-123456"
+  instance_type = "t2.micro"
+}
+```
+✅ **Best for:**  
+✔️ Infrastructure provisioning (VMs, networks, databases).  
+✔️ Managing cloud resources (AWS, Azure, GCP).  
+
+---
+
+## **2️⃣ What is Ansible?**  
+Ansible is used for **configuration management, application deployment, and automation**. It uses **YAML Playbooks** and runs tasks over **SSH** without requiring an agent.  
+
+### **Example: Installing Nginx on a Server with Ansible**  
+```yaml
+- name: Install Nginx
+  hosts: webservers
+  tasks:
+    - name: Install Nginx
+      apt:
+        name: nginx
+        state: present
+```
+✅ **Best for:**  
+✔️ Configuring servers (installing packages, setting up services).  
+✔️ Application deployment (deploying web apps, updating configurations).  
+
+---
+
+## **3️⃣ Key Differences in Usage**
+| **Scenario** | **Use Terraform** | **Use Ansible** |
+|-------------|-----------------|-----------------|
+| Create cloud infrastructure | ✅ Yes | ❌ No |
+| Configure existing servers | ❌ No | ✅ Yes |
+| Multi-cloud infrastructure management | ✅ Yes | ❌ No |
+| Install software & packages | ❌ No | ✅ Yes |
+| Automate tasks (backups, user management) | ❌ No | ✅ Yes |
+| Stateful resource tracking | ✅ Yes | ❌ No |
+
+---
