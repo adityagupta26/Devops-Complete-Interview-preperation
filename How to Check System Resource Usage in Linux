@@ -1,0 +1,114 @@
+### **How to Check System Resource Usage in Linux**  
+
+Linux provides several built-in commands to monitor **CPU, memory, disk, and network usage**.  
+
+---
+
+### **1. CPU Usage**  
+#### **Check overall CPU usage**  
+```bash
+top
+```
+- Shows real-time CPU, memory, and process usage.  
+- Press `q` to quit.  
+
+#### **Alternative: `htop` (more user-friendly)**
+```bash
+htop
+```
+*(If not installed, install it via `sudo apt install htop` or `sudo yum install htop`.)*  
+
+#### **Check CPU usage for each core**
+```bash
+mpstat -P ALL 1
+```
+*(Requires `sysstat`: Install using `sudo apt install sysstat`.)*  
+
+---
+
+### **2. Memory (RAM) Usage**  
+#### **Check overall memory usage**
+```bash
+free -h
+```
+- `-h` shows values in a human-readable format (MB/GB).  
+
+#### **Check detailed memory usage**
+```bash
+vmstat -s
+```
+
+---
+
+### **3. Disk Usage**  
+#### **Check disk space usage (file system level)**
+```bash
+df -h
+```
+- Shows available disk space per partition.  
+
+#### **Check disk usage of specific directories**
+```bash
+du -sh /path/to/directory
+```
+- `-s`: Summary only  
+- `-h`: Human-readable format  
+
+#### **Check disk I/O usage**
+```bash
+iostat -dx 1
+```
+*(Requires `sysstat`: Install using `sudo apt install sysstat`.)*  
+
+---
+
+### **4. Network Usage**  
+#### **Check real-time network traffic**
+```bash
+ifstat
+```
+*(Requires `ifstat`: Install using `sudo apt install ifstat`.)*  
+
+#### **Check network usage per process**
+```bash
+nethogs
+```
+*(Requires `nethogs`: Install using `sudo apt install nethogs`.)*  
+
+#### **Check open network connections**
+```bash
+netstat -tulnp
+```
+- Shows listening ports and active connections.  
+*(Alternative: `ss -tulnp` for faster results.)*  
+
+---
+
+### **5. System Load & Performance Summary**  
+#### **Check system load averages**
+```bash
+uptime
+```
+- Shows system uptime and average load for **1, 5, and 15 minutes**.  
+
+#### **Get a complete system summary**
+```bash
+sar -u 5 10
+```
+- Captures CPU usage **every 5 seconds, 10 times**. *(Requires `sysstat`.)*  
+
+#### **One-shot system performance report**
+```bash
+glances
+```
+*(Requires `glances`: Install using `sudo apt install glances`.)*  
+
+---
+
+### **6. Real-Time System Monitoring (All-in-One)**  
+#### **Using `glances` (recommended)**
+```bash
+glances
+```
+- Displays **CPU, memory, disk, network, and processes** in real-time.  
+---
