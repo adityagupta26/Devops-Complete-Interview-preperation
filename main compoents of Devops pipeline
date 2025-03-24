@@ -1,0 +1,51 @@
+What are the main compoents of Devops pipeline?
+
+
+           +------------------+  
+           |  Developers       |  
+           +--------+---------+  
+                    |  
+                    v  
+         +--------------------+  
+         |  Version Control   |  (Git, GitHub, GitLab)  
+         +--------------------+  
+                    |  
+                    v  
+         +----------------------+  
+         | Continuous Integration |  (Jenkins, GitHub Actions)  
+         +----------------------+  
+                    |  
+                    v  
+         +----------------------+  
+         | Automated Testing     |  (Selenium, JUnit, SonarQube)  
+         +----------------------+  
+                    |  
+                    v  
+         +----------------------+  
+         |  Build & Artifact Mgmt |  (Maven, Docker, JFrog)  
+         +----------------------+  
+                    |  
+                    v  
+         +----------------------+  
+         | Continuous Deployment  |  (ArgoCD, Spinnaker)  
+         +----------------------+  
+                    |  
+                    v  
+     +---------------------------+  
+     |  Infrastructure as Code    |  (Terraform, Ansible)  
+     +---------------------------+  
+                    |  
+                    v  
+     +---------------------------+  
+     |  Containerization & K8s   |  (Docker, Kubernetes)  
+     +---------------------------+  
+                    |  
+                    v  
+     +---------------------------+  
+     |  Monitoring & Logging     |  (Prometheus, Grafana, ELK)  
+     +---------------------------+  
+                    |  
+                    v  
+     +---------------------------+  
+     |  Security & Compliance    |  (Trivy, Vault, Snyk)  
+     +---------------------------+  
