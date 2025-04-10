@@ -1,0 +1,44 @@
+### 🔄 What is “Shift-Left” Testing?
+
+**Shift-left testing** is the practice of moving **testing earlier ("to the left")** in the software development lifecycle (SDLC).
+
+Traditionally, testing happens *after* development is complete. In shift-left, testing starts *during* or even *before* development begins.
+
+---
+
+### 🔍 Why “shift-left”?
+
+Imagine the SDLC as a timeline:
+
+```
+[ Requirements ] → [ Design ] → [ Develop ] → [ Test ] → [ Deploy ]
+                           ↑
+                      (shift-left here)
+```
+
+---
+
+### 🧠 Key Ideas:
+- **Test early, test often**: Catch issues sooner when they're cheaper and easier to fix.
+- **Prevent defects**, not just detect them.
+- **Automate testing** as part of CI/CD (unit tests, static code analysis, etc.).
+
+---
+
+### 🧰 Examples of Shift-Left Testing:
+- **Writing unit tests** alongside code
+- **Running static code analysis** on every commit
+- **TDD (Test-Driven Development)**: Write tests before the actual code
+- **Linting and code quality checks** in CI pipelines
+
+---
+
+### ✅ Benefits:
+- Reduces bugs in production
+- Speeds up feedback for developers
+- Lowers cost of fixing defects
+- Increases code quality and team confidence
+
+---
+
+Let me know if you'd like a diagram, analogy, or how this fits into CI/CD pipelines!
