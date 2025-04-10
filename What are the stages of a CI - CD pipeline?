@@ -1,0 +1,81 @@
+The **stages of a CI/CD pipeline** represent the **phases** your code goes through from commit to deployment. While tools and teams may customize this, a standard CI/CD pipeline usually follows these core stages:
+
+---
+
+### 🔧 **1. Source / Trigger**
+- **What happens?**  
+  Pipeline is triggered by a code push, merge request, tag, or a scheduled job.
+- **Example:**  
+  `git push` to `main` triggers the pipeline.
+
+---
+
+### 🛠️ **2. Build**
+- **What happens?**  
+  The source code is compiled or packaged.
+- **Purpose:**  
+  Ensure the code can build successfully and dependencies are installed.
+- **Example:**  
+  `npm run build`, `mvn package`, or build a Docker image.
+
+---
+
+### 🧪 **3. Test**
+- **What happens?**  
+  Run automated tests: unit, integration, or functional tests.
+- **Purpose:**  
+  Validate that the code behaves correctly and doesn’t break existing features.
+- **Example:**  
+  `npm test`, `pytest`, or `go test ./...`
+
+---
+
+### 🔍 **4. Analyze (Optional but recommended)**
+- **What happens?**  
+  Perform static code analysis, linting, security scanning.
+- **Purpose:**  
+  Enforce code quality and detect vulnerabilities early.
+- **Example:**  
+  `eslint`, `sonarqube`, `trivy`
+
+---
+
+### 📦 **5. Package / Artifact**
+- **What happens?**  
+  Build artifacts are stored (JAR files, Docker images, binaries, etc.).
+- **Purpose:**  
+  Reusable, versioned packages for deployment or distribution.
+- **Example:**  
+  Push Docker image to DockerHub or JAR to Nexus.
+
+---
+
+### 🚀 **6. Deploy**
+- **What happens?**  
+  The application is deployed to staging or production environments.
+- **Types:**  
+  - **Continuous Delivery:** deploy to staging automatically, manual prod approval
+  - **Continuous Deployment:** everything is automatic to production
+- **Example:**  
+  Helm chart deploy to Kubernetes, `kubectl apply`, `terraform apply`
+
+---
+
+### 📊 **7. Monitor / Feedback**
+- **What happens?**  
+  Track the health of the application post-deployment.
+- **Tools:**  
+  Prometheus, Grafana, ELK, Sentry, Datadog
+- **Purpose:**  
+  Alert on issues, ensure service reliability, and close the DevOps feedback loop.
+
+---
+
+### 🧠 Visual Summary:
+```
+[ Source ] → [ Build ] → [ Test ] → [ Analyze ] → [ Package ] → [ Deploy ] → [ Monitor ]
+```
+
+---
+
+Let me know if you want a real-world CI/CD example or pipeline YAML to go with this!
