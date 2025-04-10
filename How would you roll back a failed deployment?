@@ -1,0 +1,71 @@
+Rolling back a failed deployment is an essential DevOps practice to **restore stability quickly**. The exact method depends on the tooling and environment, but here’s a general breakdown:
+
+---
+
+### 🚨 When Do You Roll Back?
+- Errors in production (crashes, broken features)
+- Failing health checks or user reports
+- Failed smoke tests post-deployment
+
+---
+
+### 🔙 Common Rollback Strategies
+
+---
+
+### ✅ **1. Git-Based Rollback**
+- **How:** Revert the codebase to a stable commit and re-deploy.
+- **Tools:** Git + CI/CD (e.g., GitLab, GitHub Actions, Jenkins)
+- **Command:**
+  ```bash
+  git revert <bad_commit>
+  git push
+  ```
+
+---
+
+### ✅ **2. Docker Rollback**
+- **How:** Redeploy a previous stable **Docker image**.
+- **Tools:** Docker, Kubernetes, ECS
+- **Command (K8s):**
+  ```bash
+  kubectl rollout undo deployment <app-name>
+  ```
+
+---
+
+### ✅ **3. Blue-Green Deployment**
+- **How:** Traffic switches between two identical environments (blue: old, green: new).
+- **Rollback:** Route traffic back to the "blue" version if "green" fails.
+- **Tools:** Kubernetes + Ingress, AWS Elastic Beanstalk
+
+---
+
+### ✅ **4. Canary Deployment Rollback**
+- **How:** Deploy to a small subset of users first.
+- **Rollback:** Halt rollout or revert before full deployment.
+- **Tools:** Argo Rollouts, Flagger, Spinnaker
+
+---
+
+### ✅ **5. Infrastructure-as-Code Rollback**
+- **How:** Use version control (Git) to roll back Terraform/Ansible to a known-good state.
+- **Command:**
+  ```bash
+  git checkout <last-good-commit>
+  terraform apply
+  ```
+
+---
+
+### ⚠️ **Best Practices for Safe Rollbacks**
+
+- 🧪 **Run smoke tests** after deployment
+- 📝 **Tag stable releases** in Git (`v1.2.3`)
+- 📦 **Keep versioned artifacts/images**
+- 🔍 **Monitor logs and metrics** (Prometheus, Grafana, etc.)
+- 💬 **Notify teams or rollback automatically** with failure thresholds
+
+---
+
+Let me know if you want a sample rollback pipeline in Jenkins, GitLab CI, or Kubernetes!
